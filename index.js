@@ -25,6 +25,7 @@ async function run() {
 
     const vonlunteerNetworkDB = client.db('vonlunteerNetworkDB');
     const VNDBEvents = vonlunteerNetworkDB.collection('VNDBEvents');
+    const VNDBUsers = vonlunteerNetworkDB.collection('VNDBUsers');
 
     app.post('/add-event', async (req, res) => {
         const data = req.body
@@ -37,6 +38,13 @@ async function run() {
         const events = await VNDBEvents.find().toArray()
 
         res.send(events)
+    })
+
+    app.post('/register', async (req, res) => {
+        const data = req.body
+        
+        const result = await VNDBUsers.insertOne(data)
+        res.send(result)
     })
 
     console.log(
