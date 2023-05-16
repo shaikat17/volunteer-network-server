@@ -33,6 +33,12 @@ async function run() {
         res.send(result)
     })
 
+    app.get('/events', async (req, res) => {
+        const events = await VNDBEvents.find().toArray()
+
+        res.send(events)
+    })
+
     console.log(
         "Pinged your deployment. You successfully connected to MongoDB!"
       );
